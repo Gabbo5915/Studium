@@ -1,6 +1,30 @@
 import React, { Component } from 'react'
-import { Text, View, Image } from 'react-native'
+import { Text, View, Image, FlatList } from 'react-native'
+import { ListItem } from 'react-native-elements'
 
+function Message(props) {
+    renderMessageItem = ({ item, index }) => {
+        return (
+            <ListItem
+                key={index}
+                title={item.name}
+                subtitle={item.lastMessage}
+                hideChevron={true}
+                leftAvatar={{ source: { uri: item.headImage } }}
+            />
+        );
+    }
+
+    return (
+        <FlatList
+            data={props.messages}
+            renderItem={this.renderMessageItem}
+            keyExtractor={item => item.id.toString()}
+        />
+    )
+}
+export default Message;
+/*
 export default class Message extends Component {
     render() {
         let pic = { uri: 'https://pbs.twimg.com/profile_images/842919346225790976/TZXgJ9Xp_400x400.jpg' };
@@ -31,3 +55,4 @@ export default class Message extends Component {
         )
     }
 }
+*/

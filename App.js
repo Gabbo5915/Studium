@@ -7,47 +7,44 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, Alert, SafeAreaView, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { Header } from 'react-native-elements'
 import Message from './components/Message'
+import Footer from './components/Footer'
 
-class Header extends Component {
-  render() {
-    return (
-      <SafeAreaView style={styles.header}>
-        <Button onPress={() => {
-          Alert.alert('You tapped the left button');
-        }} title={this.props.left} color='white' />
-        <Text style={{ fontSize: 20, alignSelf: 'center', color: 'white' }}>{this.props.title}</Text>
-        <Button onPress={() => {
-          Alert.alert('You tapped the right button');
-        }} title={this.props.right} color='white' />
-      </SafeAreaView>
-    )
+
+
+export default class App extends Component {
+  constructor(props) {
+    super(props);
   }
-}
+  componentWillMount() {
+    return fetch('./components/mock.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
 
+        this.setState({
+          messages: responseJson,
+        }, function () {
 
-type Props = {};
-export default class App extends Component<Props> {
+        });
+
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Header title='Message' left='blank' right='add' />
-        <ScrollView style={styles.Message}>
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
+        <Header
+          centerComponent={{ text: 'Message', style: { color: '#fff', fontSize: 20 } }}
+          rightComponent={{ icon: 'add', color: '#fff' }}
+        />
+        <ScrollView style={styles.messages}>
+          <Message messages={this.state.messages} />
         </ScrollView>
-        <SafeAreaView style={{ flexDirection: 'row' }}>
-          <Button title='CLICK' />
-          <Button title='CLICK' />
-          <Button title='CLICK' />
-          <Button title='CLICK' />
-          <Button title='CLICK' />
-        </SafeAreaView>
+        <Footer />
       </View>
     );
   }
@@ -55,18 +52,15 @@ export default class App extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'white',
+    flex: 1
   },
-  header: {
-    backgroundColor: '#846bff',
-    alignSelf: 'stretch',
-    textAlign: 'center',
-    justifyContent: 'space-around',
+  messages: {
+    flex: 1
+  },
+  footer: {
+    flex: 0,
     flexDirection: 'row',
-  },
-  Message: {
-
+    alignItems: 'center',
+    justifyContent: 'space-evenly'
   }
 });

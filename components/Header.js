@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, SafeAreaView, Text } from 'react-native'
+import { Button, SafeAreaView, Text, StyleSheet } from 'react-native'
 
 export default class Header extends Component {
     render() {
