@@ -8,7 +8,7 @@ export default class FetchMessages extends React.Component {
         this.state = {}
     }
     componentWillMount() {
-        return fetch('https://raw.githubusercontent.com/Gabbo5915/Studium/master/components/mock.json')
+        return fetch('https://raw.githubusercontent.com/Gabbo5915/Studium/master/components/messageData.json')
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
