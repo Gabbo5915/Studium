@@ -9,31 +9,15 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Header } from 'react-native-elements'
-import Message from './components/Message'
 import Footer from './components/Footer'
-
+import FetchMessages from './components/FetchMessages'
 
 
 export default class App extends Component {
   constructor(props) {
     super(props);
   }
-  componentWillMount() {
-    return fetch('./components/mock.json')
-      .then((response) => response.json())
-      .then((responseJson) => {
 
-        this.setState({
-          messages: responseJson,
-        }, function () {
-
-        });
-
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
   render() {
     return (
       <View style={styles.container}>
@@ -42,7 +26,7 @@ export default class App extends Component {
           rightComponent={{ icon: 'add', color: '#fff' }}
         />
         <ScrollView style={styles.messages}>
-          <Message messages={this.state.messages} />
+          <FetchMessages />
         </ScrollView>
         <Footer />
       </View>
