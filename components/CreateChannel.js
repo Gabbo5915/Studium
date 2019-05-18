@@ -1,6 +1,34 @@
 import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
-import { Card, ListItem, CheckBox, Header } from 'react-native-elements'
+import { ListItem, CheckBox, Header } from 'react-native-elements'
+
+class Row extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { checked: false };
+    }
+
+    render() {
+        return (
+            <View style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+            }} >
+                <ListItem style={{ flex: 1 }}
+                    title={this.props.item.name}
+                    leftAvatar={{ source: { uri: this.props.item.headImage } }}
+                />
+                <CheckBox
+                    checkedIcon='check-circle'
+                    uncheckedIcon='circle-o'
+                    checked={this.state.checked}
+                    onPress={() => this.setState({ checked: !this.state.checked })}
+                />
+            </View>
+        );
+    }
+}
 
 export default class CreateChannel extends Component {
     constructor(props) {
@@ -30,34 +58,12 @@ export default class CreateChannel extends Component {
             });
     }
 
-    renderMessageItem = ({ item, index }) => {
-        return (
-            <View style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between'
-            }}>
-                <ListItem style={{ flex: 1 }}
-                    key={index}
-                    title={item.name}
-                    leftAvatar={{ source: { uri: item.headImage } }}
-                />
-                <CheckBox
-                    checkedIcon='dot-circle-o'
-                    uncheckedIcon='circle-o'
-                    checked={item.checked}
-                    onPress={() => item.checked = !item.checked}
-                />
-            </View>
-        );
-    }
-
 
     render() {
         return (
             <FlatList
                 data={this.state.messages}
-                renderItem={this.renderMessageItem}
+                renderItem={({ item }) => <Row item={item} />}
                 keyExtractor={item => item.id.toString()}
             />
         );
