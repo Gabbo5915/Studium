@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
-import { ListItem } from 'react-native-elements'
+import { ListItem, CheckBox } from 'react-native-elements'
 
-export default class FetchMessages extends Component {
+export default class Create extends Component {
     constructor(props) {
         super(props);
         this.state = {}
@@ -26,9 +26,13 @@ export default class FetchMessages extends Component {
             <ListItem
                 key={index}
                 title={item.name}
-                subtitle={item.lastMessage}
                 hideChevron={true}
                 leftAvatar={{ source: { uri: item.headImage } }}
+            />
+            ,
+            <CheckBox
+                checked={this.state.checked}
+                onPress={() => this.setState({ checked: !this.state.checked })}
             />
         );
     }
