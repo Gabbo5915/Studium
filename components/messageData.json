@@ -4,6 +4,7 @@
         "name": "Tom1",
         "headImage": "https://pbs.twimg.com/profile_images/842919346225790976/TZXgJ9Xp_400x400.jpg",
         "lastMessage": "this last message for test0",
+        "checked": true,
         "messages": [
             {
                 "content": "first message",
@@ -36,6 +37,7 @@
         "name": "Tom2",
         "headImage": "https://pbs.twimg.com/profile_images/842919346225790976/TZXgJ9Xp_400x400.jpg",
         "lastMessage": "this last message for test1",
+        "checked": false,
         "messages": [
             {
                 "content": "first message",
@@ -68,6 +70,7 @@
         "name": "Tom3",
         "headImage": "https://pbs.twimg.com/profile_images/842919346225790976/TZXgJ9Xp_400x400.jpg",
         "lastMessage": "this last message for test2",
+        "checked": false,
         "messages": [
             {
                 "content": "first message",
@@ -100,6 +103,7 @@
         "name": "Tom4",
         "headImage": "https://pbs.twimg.com/profile_images/842919346225790976/TZXgJ9Xp_400x400.jpg",
         "lastMessage": "this last message for test3",
+        "checked": false,
         "messages": [
             {
                 "content": "first message",

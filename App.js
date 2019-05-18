@@ -3,21 +3,26 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 import { Header } from 'react-native-elements'
 import Footer from './components/Footer'
 import FetchMessages from './components/FetchMessages'
+import CreateChannel from './components/CreateChannel'
+import { createStackNavigator, createAppContainer } from 'react-navigation'
 
 
-export default class App extends Component {
+class HomeScreen extends Component {
   constructor(props) {
     super(props);
   }
+  static navigationOptions = {
+    header: null,
+  };
 
   render() {
     return (
       <View style={styles.container}>
         <Header
           centerComponent={{ text: 'Message', style: { color: '#fff', fontSize: 20 } }}
-          rightComponent={{ icon: 'add', color: '#fff' }}
+          rightComponent={{ icon: 'add', color: '#fff', onPress: () => this.props.navigation.navigate('Channel') }}
         />
-        <ScrollView style={styles.messages}>
+        <ScrollView>
           <FetchMessages />
         </ScrollView>
         <Footer />
@@ -29,14 +34,23 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  messages: {
-    flex: 1
-  },
-  footer: {
-    flex: 0,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly'
   }
-});
+})
+
+const RootStack = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Channel: CreateChannel,
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
+
+const AppContainer = createAppContainer(RootStack);
+
+export default class App extends Component {
+  render() {
+    return <AppContainer />;
+  }
+}
